@@ -1,0 +1,21 @@
+header.header 
+  .inner-container
+    .row.align-items-center
+      .col-3
+        .inner-logo 
+          img(src="/images/logo.png", alt="Logo")
+      .col-9 
+        .inner-menu
+          ul 
+            li 
+              a(href="/") Home
+            li 
+              a(href="/booking") Booking  
+            li 
+              a(href="/order") Order     
+            if(myAccount)
+              li
+                a(href="/user/logout") Đăng xuất
+            else
+              li    
+                a(href="/user/login") Đăng nhập        

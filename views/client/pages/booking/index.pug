@@ -1,0 +1,23 @@
+extends ../../layouts/default.pug
+include ../../mixins/show-alert.pug
+
+block main
+  +show-alert-success(5000)
+  .container 
+    .row 
+      .col-12 
+        .box-head 
+          .inner-title #{pageTitle}
+    .row 
+      each ticket in tickets
+        .col-4 
+          .product-item 
+            .inner-image  
+              img(src=ticket.thumbnail, alt="Vé thường")
+            .inner-content 
+              .inner-title 
+                h3 #{ticket.title} 
+              .inner-price Giá: #{ticket.price}$
+              .inner-stock Số lượng còn lại: #{ticket.stock}
+            .inner-button 
+              button(type="button" class="btn btn-success btn-buy-now" currentStock=ticket.stock ticketId=ticket.id) Buy Now

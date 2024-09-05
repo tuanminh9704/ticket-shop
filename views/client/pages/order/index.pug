@@ -1,0 +1,36 @@
+extends ../../layouts/default.pug
+include ../../mixins/show-alert.pug
+
+block main 
+   +show-alert-success(5000)
+   .container 
+      .row 
+        .col-12 
+          .box-head  
+            .inner-title #{pageTitle}  
+          .box-balance 
+            .inner-balance(balance=myAccount.balance) Số dư: #{myAccount.balance}
+      .row 
+        .col-12
+          table.table.table-striped.table-bordered
+            thead 
+              th Tên vé
+              th Giá 
+              th Mô tả
+              th Hành động
+
+            tbody 
+              if(orders.length > 0)  
+                each order in orders  
+                  tr 
+                    td #{order.ticketInfo.title}
+                    td(ticket-price=order.ticketInfo.price) #{order.ticketInfo.price}
+                    td #{src=order.ticketInfo.description}
+                    td
+                      if(order.status === "confirmed")
+                        a.btn.btn-secondary() Đã mua
+                      else
+                        a.btn.btn-primary(href=`/order/confirm/${order.ticket_id}` class="button-confirm" ticketId=order.ticket_id orderId=order.id) Xác nhận
+                        a.btn.btn-danger.ml-2(href=`/order/cancel/${order.ticket_id}` class="button-cancel" stock=order.ticketInfo.stock  ticketId=order.ticket_id orderId=order.id) Hủy vé  
+
+
